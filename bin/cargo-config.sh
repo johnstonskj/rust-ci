@@ -6,7 +6,7 @@ fi
 
 source $CARGO_BIN/logging.sh
 
-debug "running cargo CI commands in $CARGO_BIN"
+debug "running cargo CI commands from $CARGO_BIN"
 
 if [[ ! -f "Cargo.toml" ]] ; then
     fatal "no Cargo.toml file, are you running in your project root?" 2>&1
@@ -35,7 +35,7 @@ else
 fi
 
 if [[ $CARGO_DEBUG = 1 ]] ; then
-    debug "setting debug flags"
+    debug "setting debug flags (CARGO_FLAGS, RUST_BACKTRACE, RUST_LOG)"
     RUST_BACKTRACE=1
     RUST_LOG=info
     if [[ ! $CARGO_FLAGS = *verbose* ]] ; then

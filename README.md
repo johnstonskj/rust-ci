@@ -19,7 +19,9 @@ env:
   - CARGO_DEPLOY=1
 ```
 
-* `CARGO_CI`; the directory you cloned this repo into.
+* `CARGO_CI`; the directory you cloned this repo into, this allows you
+  to parameterize all the script calls so that you can move the script
+  location easily.
 * `CARGO_DEBUG`; set to 1 to enable debugging (sets RUST_BACKTRACE,
   RUST_LOG, CARGO_FLAGS, and enables the script's `debug` function;
   defaults to 0.
@@ -36,7 +38,7 @@ Now add the following to install the scripts from Github.
 
 ``` yaml
 install:
-  - git clone https://github.com/johnstonskj/rust-ci.git ci
+  - git clone https://github.com/johnstonskj/rust-ci.git $CARGO_CI
 ```
 
 ## Scripts
@@ -92,8 +94,8 @@ the publish script is integrated into the Travis deploy block.
 ``` yaml
 # Script supports packages and workspaces
 script:
-- ci/bin/cargo-build.sh
-- ci/bin/cargo-lint.sh
+- $CARGO_CI/bin/cargo-build.sh
+- $CARGO_CI/bin/cargo-lint.sh
 
 # Deployment script, this is under test
 deploy:
@@ -102,7 +104,7 @@ deploy:
     tags: true
     all_branches: true
     condition: "$TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux && $CARGO_DEPLOY = 1"
-  script: ci/bin/cargo-publish.sh
+  script: $CARGO_CI/bin/cargo-publish.sh
 ```
 
 For a live example, see the repo [rust-financial](https://github.com/johnstonskj/rust-financial).

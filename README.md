@@ -66,9 +66,13 @@ install:
 It's also worth adding a line with `/ci` to your `.gitignore' file
 to not try and include the scripts you checked out into your repo.
 
-## Example
+## Example - Travis
 
-The following example shows how the scripts are used in the builds,
+An example, sort of template, Travis configuration is in the 
+[examples](https://github.com/johnstonskj/rust-ci/tree/master/examples)
+folder.
+
+The following shows how the scripts may used in the builds,
 specifically the build and lint steps are setup for all builds and
 the publish script is integrated into the Travis deploy block.
 
@@ -88,4 +92,4 @@ deploy:
   script: ci/bin/cargo-publish.sh
 ```
 
-For an example, see the repo [rust-financial](https://github.com/johnstonskj/rust-financial).
+For a live example, see the repo [rust-financial](https://github.com/johnstonskj/rust-financial).

@@ -1,0 +1,63 @@
+# Common language header
+language: rust
+sudo: false
+cache: cargo
+
+# Channels and versions you want to build
+rust:
+  - stable
+  - beta
+  - nightly
+
+# Operating systems you want to test
+os:
+  - linux
+  - osx
+
+# Set global environment only, include your secure publish token if
+# you want the deployment to work
+env:
+  global:
+    - CARGO_CI=ci
+    - CARGO_DEBUG=1
+    - CARGO_DEPLOY=1
+    - CARGO_FLAGS=--verbose
+    - CARGO_LINTER=fmt
+    - secure: ""
+
+# This includes the integration scripts
+install:
+  - git clone https://github.com/johnstonskj/rust-ci.git $CARGO_CI
+  - $CARGO_CI/bin/cargo-lint.sh --install
+
+matrix:
+  # Performance tweak
+  fast_finish: true
+  # Ignore failures in nightly, not ideal, but necessary
+  allow_failures:
+    - rust: nightly
+
+# Script supports packages and workspaces
+script:
+  - $CARGO_CI/bin/cargo-build.sh
+  - $CARGO_CI/bin/cargo-lint.sh
+
+# Deployment script, this is under test
+deploy:
+  provider: script
+  on:
+    tags: true
+    all_branches: true
+    condition: "$TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux && $CARGO_DEPLOY = 1"
+  script: $CARGO_CI/bin/cargo-publish.sh
+
+# Only initiate build on master or tag branches
+branches:
+  only:
+    - master
+    - /\d+\.\d+(\.\d+)?(\-[a-z]+[a-zA-Z0-9]*)?/
+
+# Suppress at least some emails
+notifications:
+  email:
+    on_success: never

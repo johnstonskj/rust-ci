@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 
 if [[ "$CARGO_CI" = "" ]] ; then
+    # Would prefer you set this in your CI environment to match the
+    # directory into which you cloned this repository.
     DIRNAME=$(dirname "$0")
     case $DIRNAME in
         */bin*) CARGO_CI=${DIRNAME%bin} ;;
-        bin)    CARGO_CI=. ;;
+        bin)    CARGO_CI=.  ;;
         *)      CARGO_CI=.. ;;
     esac
 fi

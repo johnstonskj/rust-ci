@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ci/cargo-config.sh
+source $CARGO_BIN/cargo-config.sh
 
 if [[ $CARGO_WORKSPACE = 1 ]] ; then
     WS_FLAGS="--all"

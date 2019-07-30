@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ci/cargo-config.sh
+source $CARGO_BIN/cargo-config.sh
 
 if [[ "$CARGO_LINTER" == "" ]] ; then
     warning "no CARGO_LINTER environment variable set, doing nothing now"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ci/cargo-config.sh
+source $CARGO_BIN/cargo-config.sh
 
 if [[ $# -lt 1 ]] ; then
     error "no CARGO_COMMAND argument supplied"

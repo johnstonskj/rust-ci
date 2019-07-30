@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source ci/cargo-config.sh
+source $CARGO_BIN/cargo-config.sh
 
 if [[ "$CARGO_DEPLOY" = "0" ]] ; then
     # Just in case.

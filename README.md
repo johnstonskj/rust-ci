@@ -14,17 +14,21 @@ env:
   - CARGO_DEBUG=1
   - CARGO_FLAGS=--verbose
   - CARGO_LINTER=fmt
+  - CARGO_LOG_NAME=my-project
   - CARGO_DEPLOY=1
 ```
 
 * `CARGO_DEBUG` - set to 1 to enable debugging (sets RUST_BACKTRACE,
-  RUST_LOG, CARGO_FLAGS, and enables the script's `debug` function.
+  RUST_LOG, CARGO_FLAGS, and enables the script's `debug` function;
+  defaults to 0.
 * `CARGO_FLAGS` - any flags you want to pass into any/all Cargo
-  commands.
+  commands; defaults to none.
 * `CARGO_LINTER`- a comma separated list of cargo commands you want
-  to run as linters. 
+  to run as linters; defaults to an emoty list.
+* `CARGO_LOG_NAME` - optional, sets the name of the logger used when 
+  outputting messages; defaults to 'rust-ci'.
 * `CARGO_DEPLOY`- set to 1 to enable the deployments executed by
-  `carg-publish.sh`
+  `carg-publish.sh`; defaults to ''.
 
 Now add the following to install the scripts from Github.
 

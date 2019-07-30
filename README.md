@@ -33,6 +33,21 @@ install:
   - git clone https://github.com/johnstonskj/rust-ci.git ci
 ```
 
+## Scripts
+
+* `cargo-config.sh` - determines whether it's a workspace or crate build; if
+  it is a workspace it populates `$CRATES` with a comma-separated list of 
+  member crates. This script is sourced by all of those that follow.
+* `cargo-build.sh` - execute a build, either for a single crate or for a 
+  workspace.
+* `cargo-command.sh` - executes a single Cargo command where the `--all`
+  parameter is required for a workspace.
+* `cargo-lint.sh` - executes lint-like tools.
+* `cargo-publish.sh` - publish either a crate or a workspace; in the case of
+  a workspace it has to publish each crate individually and in order.
+
+## Other Stuff
+
 It's also worth adding a line with `/ci` to your `.gitignore' file
 to not try and include the scripts you checked out into your repo.
 

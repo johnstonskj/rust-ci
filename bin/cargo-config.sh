@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
 if [[ "$CARGO_CI" = "" ]] ; then
-    # Would prefer you set this in your CI environment to match the
-    # directory into which you cloned this repository.
+    if [[ $CARGO_DEBUG = 1 ]] ; then
+        echo "Debug: setting CARGO_CI from current path $0"
+        echo "     : would prefer you set this in your CI environment to match the directory into which you cloned this repository."
+    fi
     DIRNAME=$(dirname "$0")
     case $DIRNAME in
         */bin*) CARGO_CI=${DIRNAME%bin} ;;

@@ -72,6 +72,8 @@ other scripts listed above. Note that it will use any value in the
 `$CARGO_LOG_NAME` environment variable as the leader in each message;
 if not set it defaults to 'rust-ci'.
 
+> Log message format: `[$CARGO_LOG_NAME] LEVEL_NAME: message-text`
+
 ## Other Stuff
 
 It's also worth adding a line with `/ci` to your `.gitignore' file

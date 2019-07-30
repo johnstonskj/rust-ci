@@ -19,17 +19,17 @@ env:
   - CARGO_DEPLOY=1
 ```
 
-* `CARGO_CI` - the directory you cloned this repo into.
-* `CARGO_DEBUG` - set to 1 to enable debugging (sets RUST_BACKTRACE,
+* `CARGO_CI`; the directory you cloned this repo into.
+* `CARGO_DEBUG`; set to 1 to enable debugging (sets RUST_BACKTRACE,
   RUST_LOG, CARGO_FLAGS, and enables the script's `debug` function;
   defaults to 0.
-* `CARGO_FLAGS` - any flags you want to pass into any/all Cargo
+* `CARGO_FLAGS`; any flags you want to pass into any/all Cargo
   commands; defaults to none.
-* `CARGO_LINTER`- a comma separated list of cargo commands you want
+* `CARGO_LINTER`; a comma separated list of cargo commands you want
   to run as linters; defaults to an emoty list.
-* `CARGO_LOG_NAME` - optional, sets the name of the logger used when 
+* `CARGO_LOG_NAME`; optional, sets the name of the logger used when 
   outputting messages; defaults to 'rust-ci'.
-* `CARGO_DEPLOY`- set to 1 to enable the deployments executed by
+* `CARGO_DEPLOY`; set to 1 to enable the deployments executed by
   `carg-publish.sh`; defaults to ''.
 
 Now add the following to install the scripts from Github.
@@ -41,28 +41,36 @@ install:
 
 ## Scripts
 
-* `cargo-config.sh` - determines whether it's a workspace or crate build; if
+* [`cargo-config.sh`](https://github.com/johnstonskj/rust-ci/blob/master/bin/cargo-config.sh); 
+  determines whether it's a workspace or crate build; if
   it is a workspace it populates `$CRATES` with a comma-separated list of 
   member crates. This script is sourced by all of those that follow.
   * uses `$CARGO_FLAGS` to pass in to all commands
   * uses `$CARGO_DEBUG` when setting up the environment, including amending
     `$CARGO_FLAGS`.
-* `cargo-build.sh` - execute a build, either for a single crate or for a 
-  workspace.
+* [`cargo-build.sh`](https://github.com/johnstonskj/rust-ci/blob/master/bin/cargo-build.sh);
+  execute a build, either for a single crate or for a workspace.
   * if called with the single argument `--clean` will perform a Cargo
   clean command before the build.
-* `cargo-command.sh` - executes a single Cargo command where the `--all`
-  parameter is required for a workspace.
+* [`cargo-command.sh`](https://github.com/johnstonskj/rust-ci/blob/master/bin/cargo-command.sh);
+  executes a single Cargo command where the `--all` parameter is required 
+  for a workspace.
   * requires at least one parameter, the command to run,
   * additional parameters are passed to the cargo command (after '--').
-* `cargo-lint.sh` - executes lint-like tools.
+* [`cargo-lint.sh`](https://github.com/johnstonskj/rust-ci/blob/master/bin/cargo-lint.sh);
+  executes lint-like tools.
   * configured by the `$CARGO_LINTER` variable.
-* `cargo-publish.sh` - publish either a crate or a workspace; in the case of
-  a workspace it has to publish each crate individually and in order.
+* [`cargo-publish.sh`](https://github.com/johnstonskj/rust-ci/blob/master/bin/cargo-build.sh);
+  publish either a crate or a workspace; in the case of a workspace it has 
+  to publish each crate individually and in order.
   * guarded by `$CARGO_DEPLOY`.
   
-The `bin` directory also contains the `logging.sh` script that simply sets
-up the internal logging functions used by the other scripts.
+The `bin` directory also contains the 
+[`logging.sh`](https://github.com/johnstonskj/rust-ci/blob/master/bin/logging.sh) 
+script that simply sets up the internal logging functions used by the 
+other scripts listed above. Note that it will use any value in the 
+`$CARGO_LOG_NAME` environment variable as the leader in each message;
+if not set it defaults to 'rust-ci'.
 
 ## Other Stuff
 

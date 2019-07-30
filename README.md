@@ -38,4 +38,24 @@ to not try and include the scripts you checked out into your repo.
 
 ## Example
 
+The following example shows how the scripts are used in the builds,
+specifically the build and lint steps are setup for all builds and
+the publish script is integrated into the Travis deploy block.
+
+``` yaml
+# Script supports packages and workspaces
+script:
+- ci/bin/cargo-build.sh
+- ci/bin/cargo-lint.sh
+
+# Deployment script, this is under test
+deploy:
+  provider: script
+  on:
+    tags: true
+    all_branches: true
+    condition: "$TRAVIS_RUST_VERSION = stable && $TRAVIS_OS_NAME = linux && $CARGO_DEPLOY = 1"
+  script: ci/bin/cargo-publish.sh
+```
+
 For an example, see the repo [rust-financial](https://github.com/johnstonskj/rust-financial).

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-CARGO_BIN=$(dirname "$0")
+if [[ "$CARGO_BIN" = "" ]] ; then
+    CARGO_BIN=$(dirname "$0")
+fi
 
 if [[ ! -f "Cargo.toml" ]] ; then
     echo "Fatal: no Cargo.toml file, are you running in your project root?" 2>&1

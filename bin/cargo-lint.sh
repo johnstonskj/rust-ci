@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source $CARGO_BIN/cargo-config.sh
+source $CARGO_CI/bin/cargo-config.sh
 
 if [[ "$CARGO_LINTER" == "" ]] ; then
     warning "no CARGO_LINTER environment variable set, doing nothing now"
@@ -33,11 +33,11 @@ else
         do
             case "$CMD" in
             fmt)
-                $CARGO_BIN/cargo-command.sh fmt --check $*
+                $CARGO_CI/bin/cargo-command.sh fmt --check $*
                 let "exit_code += $?"
                 ;;
             clippy)
-                $CARGO_BIN/cargo-command.sh clippy -D warnings $*
+                $CARGO_CI/bin/cargo-command.sh clippy -D warnings $*
                 let "exit_code += $?"
                 ;;
             *)

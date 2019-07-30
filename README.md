@@ -11,6 +11,7 @@ Add the following block to your configuration.
 ``` yaml
 env:
   global:
+  - CARGO_CI=ci
   - CARGO_DEBUG=1
   - CARGO_FLAGS=--verbose
   - CARGO_LINTER=fmt
@@ -18,6 +19,7 @@ env:
   - CARGO_DEPLOY=1
 ```
 
+* `CARGO_CI` - the directory you cloned this repo into.
 * `CARGO_DEBUG` - set to 1 to enable debugging (sets RUST_BACKTRACE,
   RUST_LOG, CARGO_FLAGS, and enables the script's `debug` function;
   defaults to 0.

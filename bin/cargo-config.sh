@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
-if [[ "$CARGO_BIN" = "" ]] ; then
-    CARGO_BIN=$(dirname "$0")
+if [[ "$CARGO_CI" = "" ]] ; then
+    DIRNAME=$(dirname "$0")
+    case $DIRNAME in
+        */bin*) CARGO_CI=${DIRNAME%bin} ;;
+        bin)    CARGO_CI=. ;;
+        *)      CARGO_CI=.. ;;
+    esac
 fi
 
-source $CARGO_BIN/logging.sh
+source $CARGO_CI/bin/logging.sh
 
-debug "running cargo CI commands from $CARGO_BIN"
+debug "running cargo CI commands from $CARGO_CI/bin"
 
 if [[ ! -f "Cargo.toml" ]] ; then
     fatal "no Cargo.toml file, are you running in your project root?" 2>&1

@@ -47,6 +47,8 @@ install:
     `$CARGO_FLAGS`.
 * `cargo-build.sh` - execute a build, either for a single crate or for a 
   workspace.
+  * if called with the single argument `--clean` will perform a Cargo
+  clean command before the build.
 * `cargo-command.sh` - executes a single Cargo command where the `--all`
   parameter is required for a workspace.
   * requires at least one parameter, the command to run,

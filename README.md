@@ -38,13 +38,20 @@ install:
 * `cargo-config.sh` - determines whether it's a workspace or crate build; if
   it is a workspace it populates `$CRATES` with a comma-separated list of 
   member crates. This script is sourced by all of those that follow.
+  * uses `$CARGO_FLAGS` to pass in to all commands
+  * uses `$CARGO_DEBUG` when setting up the environment, including amending
+    `$CARGO_FLAGS`.
 * `cargo-build.sh` - execute a build, either for a single crate or for a 
   workspace.
 * `cargo-command.sh` - executes a single Cargo command where the `--all`
   parameter is required for a workspace.
+  * requires at least one parameter, the command to run,
+  * additional parameters are passed to the cargo command (after '--').
 * `cargo-lint.sh` - executes lint-like tools.
+  * configured by the `$CARGO_LINTER` variable.
 * `cargo-publish.sh` - publish either a crate or a workspace; in the case of
   a workspace it has to publish each crate individually and in order.
+  * guarded by `$CARGO_DEPLOY`.
 
 ## Other Stuff
 

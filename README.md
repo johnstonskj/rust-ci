@@ -60,6 +60,9 @@ install:
 * `cargo-publish.sh` - publish either a crate or a workspace; in the case of
   a workspace it has to publish each crate individually and in order.
   * guarded by `$CARGO_DEPLOY`.
+  
+The `bin` directory also contains the `logging.sh` script that simply sets
+up the internal logging functions used by the other scripts.
 
 ## Other Stuff
 
@@ -70,7 +73,7 @@ to not try and include the scripts you checked out into your repo.
 
 An example, sort of template, Travis configuration is in the 
 [examples](https://github.com/johnstonskj/rust-ci/tree/master/examples)
-folder.
+directory.
 
 The following shows how the scripts may used in the builds,
 specifically the build and lint steps are setup for all builds and

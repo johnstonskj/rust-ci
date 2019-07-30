@@ -3,8 +3,7 @@
 source $CARGO_BIN/cargo-config.sh
 
 if [[ $# -lt 1 ]] ; then
-    error "no CARGO_COMMAND argument supplied"
-    exit 1
+    fatal "no CARGO_COMMAND argument supplied"
 fi
 
 if [[ $CARGO_WORKSPACE = 1 ]] ; then

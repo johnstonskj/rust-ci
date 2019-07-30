@@ -7,6 +7,7 @@ if [[ "$CARGO_LINTER" == "" ]] ; then
     exit 1
 else
     if [[ "$1" == "--install" ]] ; then
+        info "installing lint-like tools"
         let "exit_code=0"
         for CMD in ${CARGO_LINTER//,/ }
         do
